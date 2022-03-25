@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 //import 'package:kjcapp/src/AccPage.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:kjcapp/src/AccPage.dart';
+>>>>>>> master
 import 'package:kjcapp/src/circ.dart';
 import 'package:kjcapp/src/HomePage.dart';
 import 'package:kjcapp/src/Attendance.dart';
@@ -45,7 +50,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const MyAttendance(),
     const MyTT(),
     const MyCircs(),
+<<<<<<< HEAD
     //const MyAcc()
+=======
+    const MyAcc()
+>>>>>>> master
   ];
 
   void _onItemTapped(int index) {
@@ -61,6 +70,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('KJC APP'),
+<<<<<<< HEAD
           centerTitle: true,
           backgroundColor: barCol,
           leading: Builder(
@@ -120,6 +130,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ],
           ),
         ),
+=======
+          backgroundColor: barCol,
+        ),
+        body: _children[_selectedIndex],
+>>>>>>> master
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               canvasColor: barCol,
@@ -147,10 +162,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 icon: Icon(Icons.newspaper),
                 label: 'Circulars',
               ),
+<<<<<<< HEAD
               // BottomNavigationBarItem(
               //   icon: Icon(Icons.account_circle),
               //   label: 'Account',
               // ),
+=======
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                label: 'Account',
+              ),
+>>>>>>> master
             ],
             selectedItemColor: hovCol,
           ),
