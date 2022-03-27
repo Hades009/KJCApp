@@ -1,19 +1,15 @@
-<<<<<<< HEAD
 import 'dart:io';
-
-import 'package:flutter/material.dart';
-//import 'package:kjcapp/src/AccPage.dart';
-=======
 import 'package:flutter/material.dart';
 import 'package:kjcapp/src/AccPage.dart';
->>>>>>> master
 import 'package:kjcapp/src/circ.dart';
 import 'package:kjcapp/src/HomePage.dart';
 import 'package:kjcapp/src/Attendance.dart';
 import 'package:kjcapp/src/tt.dart';
+import 'package:kjcapp/src/LoginPage.dart';
 import 'package:flutter/services.dart';
 
 const barCol = Color(0xff120e43);
+const headCol = Color.fromARGB(255, 27, 21, 100);
 const hovCol = Color(0xfff9ca24);
 
 class MyApp extends StatelessWidget {
@@ -49,12 +45,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const HomePage(),
     const MyAttendance(),
     const MyTT(),
-    const MyCircs(),
-<<<<<<< HEAD
+    const LoginScreen(),
     //const MyAcc()
-=======
-    const MyAcc()
->>>>>>> master
   ];
 
   void _onItemTapped(int index) {
@@ -70,25 +62,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('KJC APP'),
-<<<<<<< HEAD
           centerTitle: true,
           backgroundColor: barCol,
           leading: Builder(
             builder: (context) => IconButton(
               icon: const Icon(Icons.account_circle),
               iconSize: 27,
-              onPressed: () => Scaffold.of(context).openDrawer(),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
           ),
-          actions:  [
-            
-            // CircleAvatar(
+          actions: [
+            // KsCircleAvatar(
             //   radius: 15,
             //   backgroundImage: ExactAssetImage('assets/images/logo.png')
-              
+
             // ),
             IconButton(
-              
               icon: Image.asset('assets/images/logo.png'),
               onPressed: () => exit(0),
             )
@@ -105,7 +96,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: headCol,
                 ),
                 child: Text('Drawer Header'),
               ),
@@ -130,11 +121,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ],
           ),
         ),
-=======
-          backgroundColor: barCol,
-        ),
-        body: _children[_selectedIndex],
->>>>>>> master
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               canvasColor: barCol,
@@ -151,7 +137,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.badge),
                 label: 'Attendance',
               ),
               BottomNavigationBarItem(
@@ -162,17 +148,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 icon: Icon(Icons.newspaper),
                 label: 'Circulars',
               ),
-<<<<<<< HEAD
               // BottomNavigationBarItem(
               //   icon: Icon(Icons.account_circle),
               //   label: 'Account',
               // ),
-=======
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle),
-                label: 'Account',
-              ),
->>>>>>> master
             ],
             selectedItemColor: hovCol,
           ),
