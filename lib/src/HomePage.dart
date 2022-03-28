@@ -8,7 +8,6 @@ const TextStyle todayStyle = TextStyle(
     fontFamily: 'Raleway',
     fontWeight: FontWeight.bold);
 const todayPadding = EdgeInsets.symmetric(horizontal: 50);
-const carouPadding = EdgeInsets.symmetric(vertical: 410.0);
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
