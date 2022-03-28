@@ -95,7 +95,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: barCol,
                 ),
                 child: Text('Drawer Header'),
               ),
