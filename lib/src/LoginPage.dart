@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           const Text(
             "Login To The KJC App",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'Raleway',
@@ -28,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 fontWeight: FontWeight.bold),
           ),
           const SizedBox(
-            height: 44.0,
+            height: 40.0,
           ),
           const TextField(
             keyboardType: TextInputType.emailAddress,
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(
-            height: 26.0,
+            height: 19.0,
           ),
           const TextField(
             obscureText: true,
@@ -48,13 +49,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           const SizedBox(
-            height: 12.0,
+            height: 9.5,
           ),
           const Text("Forgot Password?",
               style: TextStyle(
                   color: Colors.blue, decoration: TextDecoration.underline)),
           const SizedBox(
-            height: 88.0,
+            height: 76.0,
           ),
           Container(
             width: double.infinity,
