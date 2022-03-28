@@ -1,14 +1,15 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-//import 'package:kjcapp/src/AccPage.dart';
+import 'package:kjcapp/src/AccPage.dart';
 import 'package:kjcapp/src/circ.dart';
 import 'package:kjcapp/src/HomePage.dart';
 import 'package:kjcapp/src/Attendance.dart';
 import 'package:kjcapp/src/tt.dart';
+import 'package:kjcapp/src/LoginPage.dart';
 import 'package:flutter/services.dart';
 
 const barCol = Color(0xff120e43);
+const headCol = Color.fromARGB(255, 27, 21, 100);
 const hovCol = Color(0xfff9ca24);
 
 class MyApp extends StatelessWidget {
@@ -44,7 +45,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const HomePage(),
     const MyAttendance(),
     const MyTT(),
-    const MyCircs(),
+    const LoginScreen(),
     //const MyAcc()
   ];
 
@@ -67,18 +68,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             builder: (context) => IconButton(
               icon: const Icon(Icons.account_circle),
               iconSize: 27,
-              onPressed: () => Scaffold.of(context).openDrawer(),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
             ),
           ),
-          actions:  [
-            
-            // CircleAvatar(
+          actions: [
+            // KsCircleAvatar(
             //   radius: 15,
             //   backgroundImage: ExactAssetImage('assets/images/logo.png')
-              
+
             // ),
             IconButton(
-              
               icon: Image.asset('assets/images/logo.png'),
               onPressed: () => exit(0),
             )
@@ -95,7 +96,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
+<<<<<<< HEAD
                   color: barCol,
+=======
+                  color: headCol,
+>>>>>>> e1198c70314ccf929b72c94a782cb5c20ea9018d
                 ),
                 child: Text('Drawer Header'),
               ),
@@ -136,7 +141,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.badge),
                 label: 'Attendance',
               ),
               BottomNavigationBarItem(
