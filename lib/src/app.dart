@@ -63,7 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('KJC APP'),
+          title: const Text('KJC APP', style: TextStyle(fontFamily: 'Aovel')),
           centerTitle: true,
           backgroundColor: barCol,
           leading: Builder(

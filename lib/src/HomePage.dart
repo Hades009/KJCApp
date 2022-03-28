@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 const barCol = Color(0xFF120E43);
-const TextStyle todayStyle =
-    TextStyle(fontSize: 14, fontFamily: 'Raleway', fontWeight: FontWeight.bold);
+const TextStyle todayStyle = TextStyle(
+    fontSize: 26,
+    decoration: TextDecoration.underline,
+    fontFamily: 'Raleway',
+    fontWeight: FontWeight.bold);
+const todayPadding = EdgeInsets.symmetric(horizontal: 50);
+const carouPadding = EdgeInsets.symmetric(vertical: 410.0);
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,39 +25,26 @@ class _HomePageState extends State<HomePage> {
     'https://kristujayanti.edu.in/images/LIBRARY-BANN.jpg'
   ];
 
-  Widget myText(BuildContext context) {
-    return const Text(
-      'Today',
-      textAlign: TextAlign.left,
-      style: TextStyle(
-          fontSize: 16,
-          fontFamily: 'Raleway',
-          decoration: TextDecoration.underline,
-          fontWeight: FontWeight.bold),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          CarouselSlider.builder(
-            options: CarouselOptions(
-              height: 225,
-              autoPlay: true,
-            ),
-            itemCount: urlImages.length,
-            itemBuilder: (context, index, realIndex) {
-              final urlImage = urlImages[index];
-              return buildImage(urlImage, index);
-            },
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        CarouselSlider.builder(
+          options: CarouselOptions(
+            height: 230,
+            autoPlay: true,
           ),
-          const Text('Today', textAlign: TextAlign.center, style: todayStyle),
-        ],
-      ),
+          itemCount: urlImages.length,
+          itemBuilder: (context, index, realIndex) {
+            final urlImage = urlImages[index];
+            return buildImage(urlImage, index);
+          },
+        ),
+        const Padding(padding: todayPadding),
+        const Text('Today', textAlign: TextAlign.center, style: todayStyle),
+      ],
     );
   }
 }

@@ -83,6 +83,9 @@ flutter:
   #  - family: Raleway
   #    fonts:
   #      - asset: fonts/Raleway-Regular.ttf
+  #  - family: Aovel
+  #      fonts:
+  #      - asset: fonts/AovelSansRounded-rdDL.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
