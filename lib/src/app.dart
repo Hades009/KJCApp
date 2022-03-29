@@ -1,9 +1,13 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kjcapp/src/AccPage.dart';
-import 'package:kjcapp/src/circ.dart';
+
+//import 'package:kjcapp/src/circ.dart';
 import 'package:kjcapp/src/HomePage.dart';
 import 'package:kjcapp/src/Attendance.dart';
+import 'package:kjcapp/src/circ.dart';
 import 'package:kjcapp/src/tt.dart';
 import 'package:kjcapp/src/LoginPage.dart';
 import 'package:flutter/services.dart';
@@ -45,8 +49,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const HomePage(),
     const MyAttendance(),
     const MyTT(),
-    const LoginScreen(),
-    //const MyAcc()
+    const MyCircs(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -96,11 +100,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-<<<<<<< HEAD
-                  color: barCol,
-=======
                   color: headCol,
->>>>>>> e1198c70314ccf929b72c94a782cb5c20ea9018d
                 ),
                 child: Text('Drawer Header'),
               ),
@@ -152,10 +152,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 icon: Icon(Icons.newspaper),
                 label: 'Circulars',
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.account_circle),
-              //   label: 'Account',
-              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle),
+                label: 'Account',
+              ),
             ],
             selectedItemColor: hovCol,
           ),
