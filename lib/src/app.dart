@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:kjcapp/src/AccPage.dart';
 import 'package:kjcapp/src/circ.dart';
@@ -48,7 +47,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     const MyAttendance(),
     const MyTT(),
     const LoginScreen(),
-    //const MyAcc()
+    const MyAcc()
   ];
 
   void _onItemTapped(int index) {
