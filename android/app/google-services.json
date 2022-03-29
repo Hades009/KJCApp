@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "32183921266",
+    "project_id": "kjc-app-94459",
+    "storage_bucket": "kjc-app-94459.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32183921266:android:1a966c2e4444768b32b0eb",
+        "android_client_info": {
+          "package_name": "com.example.kjcapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32183921266-vh12l5c48m0fcqfo9qaf24jhaict8l4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLq0GHIDsFd9A7opvyJecMl2H1Bjtmx88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32183921266-vh12l5c48m0fcqfo9qaf24jhaict8l4b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "32183921266-6gdb0u4mldgpv7puc16neo5lhr83pnuf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kjcapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
