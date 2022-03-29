@@ -13,8 +13,10 @@ import 'package:kjcapp/src/LoginPage.dart';
 import 'package:flutter/services.dart';
 
 const barCol = Color(0xff120e43);
-const headCol = Color.fromARGB(255, 27, 21, 100);
 const hovCol = Color(0xfff9ca24);
+const headName = "Name";
+const urlImage = NetworkImage(
+    "https://static.wikia.nocookie.net/bleach/images/f/f2/686Byakuya_profile.png/revision/latest/scale-to-width-down/346?cb=20200322080959&path-prefix=en");
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -65,7 +67,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('KJC APP'),
+          title: const Text('KJC APP', style: TextStyle(fontFamily: 'Aovel')),
           centerTitle: true,
           backgroundColor: barCol,
           leading: Builder(
@@ -77,39 +79,34 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               },
             ),
           ),
-          actions: [
-            // KsCircleAvatar(
-            //   radius: 15,
-            //   backgroundImage: ExactAssetImage('assets/images/logo.png')
-
-            // ),
-            IconButton(
-              icon: Image.asset('assets/images/logo.png'),
-              onPressed: () => exit(0),
-            )
+          actions: const [
+            CircleAvatar(
+                radius: 15,
+                backgroundImage: ExactAssetImage('assets/images/logo.png')),
+            // IconButton(
+            //   icon: Image.asset('assets/images/logo.png'),
+            //   onPressed: () {
+            //     //no action
+            //   },
+            // )
           ],
         ),
         body: _children[_selectedIndex],
         drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
           child: ListView(
-            // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: headCol,
+                  color: hovCol,
                 ),
-                child: Text('Drawer Header'),
+                child: CircleAvatar(
+                  backgroundImage: urlImage,
+                ),
               ),
               ListTile(
                 title: const Text('Item 1'),
                 onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
                   Navigator.pop(context);
                 },
               ),

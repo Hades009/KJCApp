@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final barCol = Color(0xFF120E43);
+const barCol = Color(0xFF120E43);
 
 class MyAttendance extends StatelessWidget {
   const MyAttendance({Key? key}) : super(key: key);
