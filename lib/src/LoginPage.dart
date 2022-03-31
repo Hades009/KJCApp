@@ -39,23 +39,19 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     }
-
     return firebaseApp;
   }
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: GestureDetector(
         onTap: () {
           _focusEmail.unfocus();
           _focusPassword.unfocus();
         },
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Firebase Authentication'),
-          ),
           body: FutureBuilder(
             future: _initializeFirebase(),
             builder: (context, snapshot) {
@@ -122,7 +118,6 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: () async {
                                             _focusEmail.unfocus();
                                             _focusPassword.unfocus();
-
                                             if (_formKey.currentState!
                                                 .validate()) {
                                               setState(() {
@@ -174,51 +169,6 @@ class _LoginPageState extends State<LoginPage> {
                 child: CircularProgressIndicator(),
               );
             },
-=======
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Login To The KJC App",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Raleway',
-                fontSize: 42,
-                fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 40.0,
-          ),
-          const TextField(
-            keyboardType: TextInputType.emailAddress,
-            decoration: InputDecoration(
-              hintText: "Enter Email",
-              prefixIcon: Icon(Icons.mail_rounded, color: Colors.black),
-            ),
-          ),
-          const SizedBox(
-            height: 19.0,
-          ),
-          const TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-              hintText: "Enter Password",
-              prefixIcon: Icon(Icons.password_rounded, color: Colors.black),
-            ),
-          ),
-          const SizedBox(
-            height: 9.5,
-          ),
-          const Text("Forgot Password?",
-              style: TextStyle(
-                  color: Colors.blue, decoration: TextDecoration.underline)),
-          const SizedBox(
-            height: 76.0,
->>>>>>> 06b244bd062a5091a4d42ab415d06928158d2544
           ),
         ),
       ),

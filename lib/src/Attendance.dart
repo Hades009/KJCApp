@@ -11,7 +11,9 @@ class MyAttendance extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Text('Attendance Page', style: optionStyle),
+        body: Center(
+          child: Text('Coming Soon!!', style: optionStyle),
+        ),
       ),
     );
   }
