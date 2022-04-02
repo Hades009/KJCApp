@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class FireAuth {
   // For signing in an user (have already registered)
@@ -15,13 +16,14 @@ class FireAuth {
         password: password,
       );
       user = userCredential.user;
+      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         // ignore: avoid_print
-        print('No user found for that email.');
+        const AlertDialog(semanticLabel: 'No user found for that email.');
       } else if (e.code == 'wrong-password') {
         // ignore: avoid_print
-        print('Wrong password provided.');
+        const AlertDialog(semanticLabel: 'Wrong password provided.');
       }
     }
 

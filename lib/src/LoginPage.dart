@@ -27,6 +27,9 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isProcessing = false;
 
+  // ignore: prefer_typing_uninitialized_variables
+  var _success;
+
   Future<FirebaseApp> _initializeFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
 
@@ -39,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
     }
+
     return firebaseApp;
   }
 
@@ -107,6 +111,19 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                             const SizedBox(height: 24.0),
+                            Container(
+                              alignment: Alignment.center,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                _success == null
+                                    ? ''
+                                    : (_success
+                                        ? 'Successfully signed in '
+                                        : 'Wrong email or password'),
+                                style: const TextStyle(color: Colors.red),
+                              ),
+                            ),
                             _isProcessing
                                 ? const CircularProgressIndicator()
                                 : Row(
@@ -118,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                           onPressed: () async {
                                             _focusEmail.unfocus();
                                             _focusPassword.unfocus();
+
                                             if (_formKey.currentState!
                                                 .validate()) {
                                               setState(() {
@@ -136,8 +154,16 @@ class _LoginPageState extends State<LoginPage> {
                                               setState(() {
                                                 _isProcessing = false;
                                               });
+                                              if (user == null) {
+                                                setState(() {
+                                                  _success = false;
+                                                });
+                                              }
 
                                               if (user != null) {
+                                                setState(() {
+                                                  _success = true;
+                                                });
                                                 Navigator.of(context)
                                                     .pushReplacement(
                                                   MaterialPageRoute(
