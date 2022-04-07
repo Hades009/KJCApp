@@ -8,20 +8,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 const barCol = Color(0xFF120E43);
 
 class MyCirculars {
-  final String date;
+  final String description;
   final String title;
 
-  MyCirculars({required this.date, required this.title});
+  MyCirculars({required this.description, required this.title});
 
-  Map<String, dynamic> toJson() => {'date': date, 'title': title};
+  Map<String, dynamic> toJson() => {'description': description, 'title': title};
 
   static MyCirculars fromJson(Map<String, dynamic> json) => MyCirculars(
-      date: (json['date'] ?? '').toString(),
+      description: (json['description'] ?? '').toString(),
       title: (json['title'] ?? '').toString());
 }
 
 Stream<List<MyCirculars>> readCircs() => FirebaseFirestore.instance
     .collection('circulars')
+    .where('visible', isEqualTo: true)
+    .where('deleted', isEqualTo: false)
+    // .where('verified', isEqualTo: true)
     .snapshots()
     .map((snapshot) =>
         snapshot.docs.map((doc) => MyCirculars.fromJson(doc.data())).toList());
@@ -43,12 +46,12 @@ class MyCircs extends StatelessWidget {
       //   ],
       // );
       ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(6, 0, 6, 10),
+          contentPadding: const EdgeInsets.fromLTRB(6, 0, 6, 8),
           title: Container(
               padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
               color: barCol,
               child: Text(
-                circ.date,
+                circ.title,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white),
               )),
@@ -58,7 +61,7 @@ class MyCircs extends StatelessWidget {
           subtitle: Container(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
             color: const Color.fromARGB(255, 216, 216, 216),
-            child: Text(circ.title),
+            child: Text(circ.description),
           ));
 
   @override
