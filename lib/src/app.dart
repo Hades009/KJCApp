@@ -50,7 +50,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final List<Widget> _children = [
     const HomePage(),
     const MyAttendance(),
-    // const MyTT(),
+    const MyTT(),
     const MyCircs(),
     ProfilePage(),
   ];
@@ -70,58 +70,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           title: const Text('KJC APP', style: TextStyle(fontFamily: 'Aovel')),
           centerTitle: false,
           backgroundColor: barCol,
-          // leading: Builder(
-          //   builder: (context) => IconButton(
-          //     icon: const Icon(Icons.account_circle),
-          //     iconSize: 27,
-          //     onPressed: () {
-          //       Scaffold.of(context).openDrawer();
-          //     },
-          //   ),
-          // ),
           actions: const [
             CircleAvatar(
                 radius: 15,
                 backgroundImage: ExactAssetImage('assets/images/logo.png')),
-            // IconButton(
-            //   icon: Image.asset('assets/images/logo.png'),
-            //   onPressed: () {
-            //     //no action
-            //   },
-            // )
           ],
         ),
         body: _children[_selectedIndex],
-        // drawer: Drawer(
-        //   child: ListView(
-        //     padding: EdgeInsets.zero,
-        //     children: [
-        //       const DrawerHeader(
-        //         decoration: BoxDecoration(
-        //           color: hovCol,
-        //         ),
-        //         child: CircleAvatar(
-        //           backgroundImage: urlImage,
-        //         ),
-        //       ),
-        //       ListTile(
-        //         title: const Text('Item 1'),
-        //         onTap: () {
-        //           Navigator.pop(context);
-        //         },
-        //       ),
-        //       ListTile(
-        //         title: const Text('Item 2'),
-        //         onTap: () {
-        //           // Update the state of the app
-        //           // ...
-        //           // Then close the drawer
-        //           Navigator.pop(context);
-        //         },
-        //       ),
-        //     ],
-        //   ),
-        // ),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               canvasColor: barCol,
@@ -141,10 +96,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 icon: Icon(Icons.badge),
                 label: 'Attendance',
               ),
-              // BottomNavigationBarItem(
-              //   icon: Icon(Icons.event),
-              //   label: 'Time-Table',
-              // ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.event),
+                label: 'Time-Table',
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper),
                 label: 'Circulars',

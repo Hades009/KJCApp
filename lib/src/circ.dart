@@ -43,20 +43,21 @@ class MyCircs extends StatelessWidget {
       //   ],
       // );
       ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+          contentPadding: const EdgeInsets.fromLTRB(6, 0, 6, 10),
           title: Container(
-              padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
-              color: Colors.lightGreenAccent,
+              padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+              color: barCol,
               child: Text(
                 circ.date,
                 textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.white),
               )),
           //tileColor: Colors.lightGreen,
           //contentPadding: const EdgeInsets.only(bottom: 50),
 
           subtitle: Container(
             padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
-            color: Colors.lightBlue,
+            color: const Color.fromARGB(255, 216, 216, 216),
             child: Text(circ.title),
           ));
 

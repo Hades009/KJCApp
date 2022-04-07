@@ -1,8 +1,10 @@
-// import 'dart:ffi';s
-// import 'package:flutter/material.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
-// import 'package:kjcapp/main.dart';
-/*
+import 'dart:ffi';
+// import 'dart:js_util';
+import 'package:flutter/material.dart';
+import 'package:kjcapp/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
 const barCol = Color(0xFF120E43);
 const TextStyle headStyle = TextStyle(
     fontSize: 26,
@@ -10,21 +12,19 @@ const TextStyle headStyle = TextStyle(
     fontFamily: 'Raleway',
     fontWeight: FontWeight.bold);
 
-class FireStorageService extends ChangeNotifier {
-  FireStorageService();
+class Storage {
+  final firebase_storage.FirebaseStorage storage =
+      firebase_storage.FirebaseStorage.instance;
 
-  static Future<dynamic> loadImage(BuildContext context, String Image) async {
-    return await FirebaseStorage.instance.ref().child(Image).getDownloadURL();
+  Future<String> getdownloadURL(String imageName) async {
+    String downloadURL =
+        await storage.ref('images/$imageName').getDownloadURL();
+
+    return downloadURL;
   }
 }
 
-Future<Widget> _getImage(BuildContext context, String img) async {
-  late Image ttImg;
-  await FireStorageService.loadImage(context, img).then((value) {
-    ttImg = Image.network(value.toString(), fit: BoxFit.fill);
-  });
-  return ttImg;
-}
+final Storage storage = Storage();
 
 class MyTT extends StatelessWidget {
   const MyTT({Key? key}) : super(key: key);
@@ -33,44 +33,29 @@ class MyTT extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        const Center(
-          child: Text(
-            'TIME-TABLE',
-            style: headStyle,
-          ),
-        ),
-        FutureBuilder<Widget>(
-          future: _getImage(context, "ghost.png"),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width / 1.2,
-                  height: MediaQuery.of(context).size.height / 2,
-                  child: snapshot.data,
-                ),
+        const Padding(padding: EdgeInsets.only(top: 10.0)),
+        const Text('TIME-TABLE', textAlign: TextAlign.center, style: headStyle),
+        FutureBuilder(
+          future: storage.getdownloadURL('time_table_BCA_A.jpeg'),
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something is wrong! ${snapshot.error}');
+            } else if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData) {
+              return SizedBox(
+                width: 400,
+                height: 600,
+                child: Image.network(snapshot.data!, fit: BoxFit.contain),
               );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
             }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                // child: Container(
-                //   padding: const EdgeInsets.only(top: 50),
-                //   width: MediaQuery.of(context).size.width / 8,
-                //   height: MediaQuery.of(context).size.height,
-                child: const CircularProgressIndicator(),
-              );
-              // );
-            }
-            return Center(
-              child: Container(),
-            );
+            return Container();
           },
         ),
       ],
     );
   }
 }
-*/

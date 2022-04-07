@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               'NAME: ${_currentUser.displayName}',
@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: const Text('Sign out'),
+                    child: const Text('Log out'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                       shape: RoundedRectangleBorder(
