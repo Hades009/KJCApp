@@ -6,11 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 const barCol = Color(0xFF120E43);
-const TextStyle headStyle = TextStyle(
-    fontSize: 26,
-    decoration: TextDecoration.underline,
-    fontFamily: 'Raleway',
-    fontWeight: FontWeight.bold);
+const TextStyle headStyle =
+    TextStyle(fontSize: 26, fontFamily: 'Raleway', fontWeight: FontWeight.bold);
 
 class Storage {
   final firebase_storage.FirebaseStorage storage =

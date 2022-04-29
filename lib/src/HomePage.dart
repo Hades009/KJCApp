@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 const barCol = Color(0xFF120E43);
-const TextStyle todayStyle = TextStyle(
-    fontSize: 26,
-    decoration: TextDecoration.underline,
-    fontFamily: 'Raleway',
-    fontWeight: FontWeight.bold);
+const TextStyle todayStyle =
+    TextStyle(fontSize: 26, fontFamily: 'Raleway', fontWeight: FontWeight.bold);
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,9 +20,9 @@ class _HomePageState extends State<HomePage> {
     'https://kristujayanti.edu.in/images/LIBRARY-BANN.jpg'
   ];
   final urlTodays = [
-    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1648639192231.jpg',
-    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1648639482979.jpg',
-    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1648806582027.jpg'
+    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1650610805532.jpg',
+    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1649672647997.jpg',
+    'https://kjc.sgp1.digitaloceanspaces.com/glimpses/news/image-1650347525196.jpg'
   ];
 
   @override
