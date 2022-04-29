@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 16.0),
           Text(
-            'EMAIL: ${_currentUser.email}',
+            '${_currentUser.email}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(height: 16.0),
