@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         const Padding(padding: EdgeInsets.only(top: 30)),
         CarouselSlider.builder(
           options: CarouselOptions(
-            height: 300,
+            height: 250,
             autoPlay: false,
           ),
           itemCount: urlTodays.length,
