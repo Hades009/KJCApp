@@ -25,6 +25,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var userId = FirebaseAuth.instance.currentUser!.email;
+
   // final double coverh = 160;
   final double profileH = 144;
   bool _isSendingVerification = false;
@@ -37,6 +39,8 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
   }
 
+  CollectionReference usersCollection =
+      FirebaseFirestore.instance.collection('students');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,96 +56,114 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildContent() {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            '${_currentUser.displayName}',
-            style: contentStyle,
-          ),
-          const SizedBox(height: 16.0),
-          Text(
-            '${_currentUser.email}',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          const SizedBox(height: 16.0),
-          _currentUser.emailVerified
-              ? Text(
-                  'Email verified',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.green),
-                )
-              : Text(
-                  'Email not verified',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(color: Colors.red),
-                ),
-          const SizedBox(height: 16.0),
-          _isSendingVerification
-              ? const CircularProgressIndicator()
-              : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () async {
-                        setState(() {
-                          _isSendingVerification = true;
-                        });
-                        await _currentUser.sendEmailVerification();
-                        setState(() {
-                          _isSendingVerification = false;
-                        });
-                      },
-                      child: const Text('Verify email'),
-                    ),
-                    const SizedBox(width: 2.0),
-                    IconButton(
-                      icon: const Icon(Icons.refresh),
-                      onPressed: () async {
-                        User? user = await FireAuth.refreshUser(_currentUser);
-                        if (user != null) {
-                          setState(() {
-                            _currentUser = user;
-                          });
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    _isSigningOut
-                        ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: () async {
-                              setState(() {
-                                _isSigningOut = true;
-                              });
-                              await FirebaseAuth.instance.signOut();
-                              setState(() {
-                                _isSigningOut = false;
-                              });
-                              Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
-                                ),
-                              );
-                            },
-                            child: const Text('Log out'),
-                            style: ElevatedButton.styleFrom(
-                              primary: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
+        child: StreamBuilder<DocumentSnapshot>(
+            stream: usersCollection.doc(userId).snapshots(),
+            builder: (context, streamSnapshot) {
+              if (streamSnapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.blue,
+                  ),
+                );
+              }
+
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    " ${streamSnapshot.data!['name']}",
+                    style: contentStyle,
+                  ),
+                  const SizedBox(height: 16.0),
+                  Text(
+                    " ${streamSnapshot.data!['course']} ${streamSnapshot.data!['section']}",
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  const SizedBox(height: 16.0),
+                  Text(
+                    '${_currentUser.email}',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  const SizedBox(height: 16.0),
+                  _currentUser.emailVerified
+                      ? Text(
+                          'Email verified',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(color: Colors.green),
+                        )
+                      : Text(
+                          'Email not verified',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText1!
+                              .copyWith(color: Colors.red),
+                        ),
+                  const SizedBox(height: 16.0),
+                  _isSendingVerification
+                      ? const CircularProgressIndicator()
+                      : Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  _isSendingVerification = true;
+                                });
+                                await _currentUser.sendEmailVerification();
+                                setState(() {
+                                  _isSendingVerification = false;
+                                });
+                              },
+                              child: const Text('Verify email'),
                             ),
-                          ),
-                  ],
-                )
-        ],
-      ),
-    );
+                            const SizedBox(width: 2.0),
+                            IconButton(
+                              icon: const Icon(Icons.refresh),
+                              onPressed: () async {
+                                User? user =
+                                    await FireAuth.refreshUser(_currentUser);
+                                if (user != null) {
+                                  setState(() {
+                                    _currentUser = user;
+                                  });
+                                }
+                              },
+                            ),
+                            const SizedBox(height: 16.0),
+                            _isSigningOut
+                                ? const CircularProgressIndicator()
+                                : ElevatedButton(
+                                    onPressed: () async {
+                                      setState(() {
+                                        _isSigningOut = true;
+                                      });
+                                      await FirebaseAuth.instance.signOut();
+                                      setState(() {
+                                        _isSigningOut = false;
+                                      });
+                                      Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage(),
+                                        ),
+                                      );
+                                    },
+                                    child: const Text('Log out'),
+                                    style: ElevatedButton.styleFrom(
+                                      primary: Colors.red,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                    ),
+                                  ),
+                          ],
+                        )
+                ],
+              );
+            }));
   }
 
   Widget buildTop() {

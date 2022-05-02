@@ -1,6 +1,7 @@
 // import 'dart:ffi';
 // import 'dart:js';
 //import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:firebase_firestore/firebase_firestore.dart';
@@ -20,49 +21,67 @@ class MyCirculars {
       title: (json['title'] ?? '').toString());
 }
 
-Stream<List<MyCirculars>> readCircs() => FirebaseFirestore.instance
-    .collection('circulars')
-    .where('visible', isEqualTo: true)
-    .where('deleted', isEqualTo: false)
-    // .where('verified', isEqualTo: true)
-    .snapshots()
-    .map((snapshot) =>
-        snapshot.docs.map((doc) => MyCirculars.fromJson(doc.data())).toList());
+String? course;
+var userId = FirebaseAuth.instance.currentUser!.email;
+fetchUser() async {
+  var collection = FirebaseFirestore.instance.collection('students');
+  var docSnapshot = await collection.doc(userId).get();
+  if (docSnapshot.exists) {
+    Map<String, dynamic> data = docSnapshot.data()!;
+    // ignore: avoid_print
+    // print(data['course']);
+    // // You can then retrieve the value from the Map like this:
+    course = data['course'];
+  }
+}
 
-class MyCircs extends StatelessWidget {
+Stream<List<MyCirculars>> readCircs() {
+  return FirebaseFirestore.instance
+      .collection('circulars')
+      .where('visible', isEqualTo: true)
+      .where('deleted', isEqualTo: false)
+      .where('course', arrayContains: course)
+      // .where('verified', isEqualTo: true)
+      .snapshots()
+      .map((snapshot) => snapshot.docs
+          .map((doc) => MyCirculars.fromJson(doc.data()))
+          .toList());
+}
+
+class MyCircs extends StatefulWidget {
   const MyCircs({Key? key}) : super(key: key);
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontFamily: 'Raleway');
 
-  Widget circBuild(MyCirculars circ) =>
-      //Column(
-      //   children: [
-      //     Row(
-      //       children: [Flexible(child: Center(child: Text(circ.date)))],
-      //     ),
-      //     Row(
-      //       children: [Flexible(child: Text(circ.title))],
-      //     )
-      //   ],
-      // );
-      ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(6, 0, 6, 8),
-          title: Container(
-              padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
-              color: barCol,
-              child: Text(
-                circ.title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white),
-              )),
-          //tileColor: Colors.lightGreen,
-          //contentPadding: const EdgeInsets.only(bottom: 50),
+  @override
+  State<MyCircs> createState() => _MyCircsState();
+}
 
-          subtitle: Container(
-            padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
-            color: const Color.fromARGB(255, 216, 216, 216),
-            child: Text(circ.description),
-          ));
+class _MyCircsState extends State<MyCircs> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) => fetchUser());
+  }
+
+  Widget circBuild(MyCirculars circ) => ListTile(
+      contentPadding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+      title: Container(
+          padding: const EdgeInsets.fromLTRB(0, 5, 0, 15),
+          color: barCol,
+          child: Text(
+            circ.title,
+            textAlign: TextAlign.center,
+            style: const TextStyle(color: Colors.white),
+          )),
+      //tileColor: Colors.lightGreen,
+      //contentPadding: const EdgeInsets.only(bottom: 50),
+
+      subtitle: Container(
+        padding: const EdgeInsets.fromLTRB(8, 5, 0, 20),
+        color: const Color.fromARGB(255, 216, 216, 216),
+        child: Text(circ.description),
+      ));
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +97,7 @@ class MyCircs extends StatelessWidget {
               final circular = snapshot.data!;
               return ListView(
                   //itemExtent: 100,
-                  //padding: const EdgeInsets.only(bottom: 20),
+                  padding: const EdgeInsets.only(top: 0),
                   children: circular.map(circBuild).toList());
             } else {
               return const Center(child: CircularProgressIndicator());

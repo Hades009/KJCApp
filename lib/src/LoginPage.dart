@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:kjcapp/src/HomePage.dart';
 import 'package:flutter/services.dart';
+import 'package:kjcapp/src/HomePage.dart';
 import 'package:kjcapp/src/app.dart';
 
 import 'package:kjcapp/src/AccPage.dart';
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const MyApp(),
+          builder: (context) => const HomePage(),
         ),
       );
     }
